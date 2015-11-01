@@ -1,6 +1,11 @@
 git add .
 git commit -m "desription of commit"
 
+// Push to GitHub
 git push origin master
 
+// pull from GitHub
 git pull origin master
+
+// run application
+python server.py
