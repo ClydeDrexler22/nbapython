@@ -1,0 +1,6 @@
+git add .
+git commit -m "desription of commit"
+
+git push origin master
+
+git pull origin master
