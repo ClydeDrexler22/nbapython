@@ -9,3 +9,10 @@ git pull origin master
 
 // run application
 python server.py
+
+Getting Started
+1. Run in virtual environment by opening project 
+root in command line and typing
+\venv\scripts\activate
+2. Run python server to serve application
+python server.py
