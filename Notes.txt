@@ -1,0 +1,19 @@
+https://github.com/ClydeDrexler22/nbapython.git
+
+user:ClydeDrexler22
+pass:BobaFett77
+
+git add .
+
+git commit -m 'discription of change'
+
+git push origin master
+
+git pull origin master
+
+filterByPosition(players, position):
+	results = []
+x.append()
+
+
+list comprehention 
