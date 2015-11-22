@@ -5,11 +5,11 @@ class Basketballdb(object):
     players = None;
     teams = None;
     def __init__(self):
-        self.dbloc = './db/players_regular_season.csv'
+        self.dbloc = './db/player_regular_season.csv'
     def getPlayers(self):
         players = []
         if(not self.players):
-            with open('./db/players_regular_season.csv') as playerscsv:
+            with open('./db/player_regular_season.csv') as playerscsv:
                 reader = csv.DictReader(playerscsv)
                 for idx,row in enumerate(reader):
                     player = row

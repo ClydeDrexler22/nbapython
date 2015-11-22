@@ -5,6 +5,7 @@ from Basketballdb import Basketballdb
 
 from flask import Flask
 from flask import request
+from flask import render_template
 app = Flask(__name__)
 
 @app.route('/')
@@ -23,18 +24,30 @@ def filterByTeamName(teams,theTeam):
                 return False
 
         if result:
-                return result
-
-#did we get team at all?
+                return [result]
 
 
 @app.route('/query', methods=['POST', 'GET'])
 def query():
+        #get full players and teams
         db = Basketballdb()
-        theTeam = request.args.get('team', False)
         teams = db.getTeams()
-        filterteams = filterByTeamName(teams,theTeam)
-        return json.dumps(filterteams)
+        players = db.getPlayers()
+
+        #start with full teams and players
+        filterteams = teams
+        filterplayers = players
+
+        #filters
+        if( request.args.get('team', False) ):
+            filterteams = filterByTeamName(filterteams, request.args.get('team', False))
+                
+        data = { 'teams' : teams, 'players' : players,
+                 'filteredTeams' : filterteams[:50],
+                 'filteredPlayers' : filterplayers[:50] }
+        
+	return render_template('main.html', data=data)
+        #return json.dumps(filterteams)
 
 if __name__ == '__main__':
 	app.debug = True

@@ -1,4 +1,4 @@
-﻿team,location,name,leag
+team,location,name,leag
 ANA,Anaheim,Amigos,A
 AND,Anderson,Duffey Packers,N
 ATL,Atlanta,Hawks,N
@@ -99,6 +99,5 @@ WAC,Washington,Caps,A
 WAS,Washington,Wizards,N
 WAT,Waterloo,Hawks,N
 WSC,Washington,Capitols,N
-
-(100 row(s) affected)
-
+,,,
+(100 row(s) affected),,,
