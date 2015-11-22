@@ -26,7 +26,19 @@ def filterByTeamName(teams,theTeam):
         if result:
                 return [result]
 
+def filterByPlayerName(players, thePlayer):
+        result = False
+        if (thePlayer != False):
+                for name in players:
+                        if thePlayer == name['name']:
+                                result = name
+                                break
+        else:
+                return False
 
+        if result:
+                return [result]
+        
 @app.route('/query', methods=['POST', 'GET'])
 def query():
         #get full players and teams

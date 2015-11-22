@@ -17,3 +17,7 @@ x.append()
 
 
 list comprehention 
+
+http://127.0.0.1:5000/query?team=CHI
+
+to get flask running:
