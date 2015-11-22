@@ -26,7 +26,7 @@ def filterByTeamName(teams,theTeam):
                 return result
 
 #did we get team at all?
-        
+
 
 @app.route('/query', methods=['POST', 'GET'])
 def query():
@@ -39,6 +39,3 @@ def query():
 if __name__ == '__main__':
 	app.debug = True
 	app.run()
-
-
-        
