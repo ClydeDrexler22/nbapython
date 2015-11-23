@@ -29,9 +29,9 @@ def filterByTeamName(teams,theTeam):
 def filterByPlayerName(players, thePlayer):
         result = False
         if (thePlayer != False):
-                for name in players:
-                        if thePlayer == name['name']:
-                                result = name
+                for player in players:
+                        if thePlayer == player['lastname']:
+                                result = player
                                 break
         else:
                 return False
@@ -58,7 +58,7 @@ def query():
                  'filteredTeams' : filterteams[:50],
                  'filteredPlayers' : filterplayers[:50] }
         
-	return render_template('main.html', data=data)
+        return render_template('main.html', data=data)
         #return json.dumps(filterteams)
 
 if __name__ == '__main__':
