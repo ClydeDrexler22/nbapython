@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return 'Welcome to the app'
+	return 'Welcome to the app.  Go to /query for the application home page.'
 
 def filterByTeamName(teams,theTeam):
         result = False
@@ -53,6 +53,9 @@ def query():
         #filters
         if( request.args.get('team', False) ):
             filterteams = filterByTeamName(filterteams, request.args.get('team', False))
+
+        if( request.args.get('player_last_name', False) ):
+            filterplayers = filterByPlayerName(players, request.args.get('player_last_name', False))
                 
         data = { 'teams' : teams, 'players' : players,
                  'filteredTeams' : filterteams[:50],
