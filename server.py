@@ -12,33 +12,56 @@ app = Flask(__name__)
 def index():
 	return 'Welcome to the app.  Go to /query for the application home page.'
 
-def filterByTeamName(teams,theTeam):
-        result = False
+def filterByTeamName(players,theTeam):
+        result = []
         if (theTeam != False):
         #return ateam
-                for team in teams:
-                        if theTeam == team['name']:
-                                result = team
-                                break
-        else:
-                return False
-
-        if result:
-                return [result]
-
-def filterByPlayerName(players, thePlayer):
-        result = False
-        if (thePlayer != False):
                 for player in players:
-                        if thePlayer == player['lastname']:
-                                result = player
-                                break
+                        if( not 'team_name' in player ):
+                                continue
+                        
+                        if theTeam == player['team_name']:
+                                result.append(player)
         else:
-                return False
+                return players
 
         if result:
-                return [result]
-        
+                return result
+
+def filterByPlayerLastName(players, lastName):
+        result = []
+        if (lastName != False):
+                for player in players:
+                        if lastName == player['lastname']:
+                                result.append(player)
+        else:
+                return players
+
+        if result:
+                return result
+
+def filterByPlayerFirstName(players, firstName):
+        result = []
+        if(firstName != False):
+                #build query to filter by first name ['firstname']
+                result = players
+        else:
+                return players
+
+        if result:
+                return result
+
+def filterByYear(players, year):
+        result = []
+        if(year != False):
+                #build query to filter by year ['year']
+                result = players
+        else:
+                return players
+
+        if result:
+                return result
+
 @app.route('/query', methods=['POST', 'GET'])
 def query():
         #get full players and teams
@@ -46,21 +69,42 @@ def query():
         teams = db.getTeams()
         players = db.getPlayers()
 
+		#combine players with their team
+        for player in players:
+                for team in teams:
+                    if player['team'] == team['team']:
+                        player['team_league'] = team['leag']
+                        player['team_location'] = team['location']
+                        player['team_name'] = team['name']
+
         #start with full teams and players
         filterteams = teams
         filterplayers = players
 
-        #filters
-        if( request.args.get('team', False) ):
-            filterteams = filterByTeamName(filterteams, request.args.get('team', False))
+        #TEAM NAME FILTER
+	team_name = request.args.get('team', False)
+        if( team_name ):
+                if( team_name != 'Any' ):
+                        filterplayers = filterByTeamName(filterplayers, team_name)
 
-        if( request.args.get('player_last_name', False) ):
-            filterplayers = filterByPlayerName(players, request.args.get('player_last_name', False))
+        #PLAYER LAST NAME 
+	player_last_name = request.args.get('player_last_name', False)
+        if( player_last_name ):
+                filterplayers = filterByPlayerLastName(filterplayers, player_last_name)
+
+        #PLAYER FIRST NAME
+        player_first_name = request.args.get('player_first_name', False)
+        if( player_first_name ):
+                filterplayers = filterByPlayerFirstName(filterplayers, player_first_name)
+
+        #FILTER BY YEAR
+        player_year = request.args.get('player_year', False)
+        if( player_year ):
+                filterplayers = filterByYear(filterplayers, player_year)
                 
         data = { 'teams' : teams, 'players' : players,
-                 'filteredTeams' : filterteams[:50],
-                 'filteredPlayers' : filterplayers[:50] }
-        
+                 'filteredPlayers' : filterplayers[:100] }
+
         return render_template('main.html', data=data)
         #return json.dumps(filterteams)
 

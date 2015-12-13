@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>NBA Python</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <style>
       thead {
         text-align : left;
@@ -10,70 +12,55 @@
     </style>
   </head>
   <body>
-    <h1>NBA Database Application</h1>
-    <p>Use this application to search for players and teams in the NBA.</p>
+    <div class="container">
+      <h1><span class="glyphicon glyphicon-search"> </span> NBA Database Application</h1>
+      <p>Use this application to search for players and teams in the NBA.</p>
 
-    <h3>NBA Filter Form</h3>
-    <form action="./query">
-      <label for="team">Team Name</label>
-      <select name="team" id="teamName">
-        <!--<option value='Celtics'>Celtics</option>-->
-        {% for team in data.teams %}
-          <option name="{{team.name}}">{{team.name}}</option>
-        {% endfor %}
-      </select>
-      <br>
-      <label for="player_last_name">Player Last Name</label>
-      <input type="text" name="player_last_name" id="lName"></select>
-      <br>
-      <input type="submit" value="Submit">
-    </form>
-
-    <!-- teams flteredTeams -->
-    <h2>NBA Teams</h2>
-    <div id="teamTable">
-      <table>
-        <thead>
-          <tr>
-            {% for key, team in data.filteredTeams[0].iteritems() %}
-              <th>{{key}}</th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          {% for team in data.filteredTeams %}
-          <tr>
-              {% for key, val in team.iteritems() %}
-              <td>{{val}}</td>
-              {% endfor %}
-          </tr>
+      <h3>NBA Filter Form</h3>
+      <form action="./query">
+        <label for="team">Team Name</label>
+        <select name="team" id="teamName">
+          <!--<option value='Celtics'>Celtics</option>-->
+          <option name="Any">Any</option>
+          {% for team in data.teams %}
+            <option name="{{team.name}}">{{team.name}}</option>
           {% endfor %}
-        </tbody>
-      </table>
-    </div>
+        </select>
+        <br><br>
+        <label for="player_last_name">Player Last Name</label>
+        <input type="text" name="player_last_name" id="lName">
+        <br><br>
+        <label for="player_first_name">Player First Name</label>
+        <input type="text" name="player_first_name" id="fName">
+        <br><br>
+        <label for="year">Specific Year</label>
+        <input type="text" name="year" id="year">
+        <br><br>
+        <input type="submit" value="Submit">
+      </form>
 
-    <!-- players filteredPlayers -->
-    <h2>NBA Players</h2>
-    <div id="playerTable">
-      <table>
-        <thead>
-          <tr>
-            {% for key, player in data.filteredPlayers[0].iteritems() %}
-              <th>{{key}}</th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          {% for player in data.filteredPlayers %}
-          <tr>
-              {% for key, val in player.iteritems() %}
-              <td>{{val}}</td>
+      <!-- players filteredPlayers -->
+      <h2>NBA Players</h2>
+      <div id="playerTable" class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              {% for key, player in data.filteredPlayers[0].iteritems() %}
+                <th>{{key}}</th>
               {% endfor %}
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+            </tr>
+          </thead>
+          <tbody>
+            {% for player in data.filteredPlayers %}
+            <tr>
+                {% for key, val in player.iteritems() %}
+                <td>{{val}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
-
   </body>
 </html>
