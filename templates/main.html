@@ -45,6 +45,7 @@
         <table class="table">
           <thead>
             <tr>
+                <th>logo</th>
               {% for key, player in data.filteredPlayers[0].iteritems() %}
                 <th>{{key}}</th>
               {% endfor %}
@@ -53,6 +54,8 @@
           <tbody>
             {% for player in data.filteredPlayers %}
             <tr>
+                <td><img src="http://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/{{player.team}}.png&h=50&w=50" alt="team logo"
+                    onerror="if (this.src != 'error.jpg') this.src = 'error.jpg';"></td>
                 {% for key, val in player.iteritems() %}
                 <td>{{val}}</td>
                 {% endfor %}
