@@ -43,8 +43,9 @@ def filterByPlayerLastName(players, lastName):
 def filterByPlayerFirstName(players, firstName):
         result = []
         if(firstName != False):
-                #build query to filter by first name ['firstname']
-                result = players
+                for player in players:
+                        if firstName == player['firstname']:
+                                result.append(player)#build query to filter by first name ['firstname']
         else:
                 return players
 
@@ -54,8 +55,10 @@ def filterByPlayerFirstName(players, firstName):
 def filterByYear(players, year):
         result = []
         if(year != False):
-                #build query to filter by year ['year']
-                result = players
+                for player in players:
+                        if year == player['year']:
+                                result.append(player) 
+                        #build query to filter by year ['year']
         else:
                 return players
 
@@ -82,13 +85,13 @@ def query():
         filterplayers = players
 
         #TEAM NAME FILTER
-	team_name = request.args.get('team', False)
+        team_name = request.args.get('team', False)
         if( team_name ):
                 if( team_name != 'Any' ):
                         filterplayers = filterByTeamName(filterplayers, team_name)
 
         #PLAYER LAST NAME 
-	player_last_name = request.args.get('player_last_name', False)
+        player_last_name = request.args.get('player_last_name', False)
         if( player_last_name ):
                 filterplayers = filterByPlayerLastName(filterplayers, player_last_name)
 
