@@ -65,6 +65,24 @@ def filterByYear(players, year):
         if result:
                 return result
 
+def filterByPoints(players, points):
+        result = []
+        if(points != False):
+                for player in players:
+                        try:
+                                if int(points) <= int(player['pts']):
+                                        result.append(player)
+                        except ValueError:
+                                continue
+                        
+        else:
+                return players
+
+        if result:
+                return result
+
+
+
 @app.route('/query', methods=['POST', 'GET'])
 def query():
         #get full players and teams
@@ -104,6 +122,12 @@ def query():
         player_year = request.args.get('year', False)
         if( player_year ):
                 filterplayers = filterByYear(filterplayers, player_year)
+
+        #Filter By Points
+        player_points = request.args.get('points', False)
+        if(player_points):
+                filterplayers = filterByPoints(filterplayers, player_points)
+                
                 
         data = { 'teams' : teams, 'players' : players,
                  'filteredPlayers' : filterplayers[:100] }
