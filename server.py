@@ -81,6 +81,21 @@ def filterByPoints(players, points):
         if result:
                 return result
 
+def filterByRebounds(players, rebounds):
+        result = []
+        if(rebounds != False):
+                for player in players:
+                        try:
+                                if int(rebounds) <= int(players['reb']):
+                                        result.append(player)
+                        except:
+                                continue
+
+        else:
+                return players
+        if result:
+                return result
+
 
 
 @app.route('/query', methods=['POST', 'GET'])
@@ -127,6 +142,13 @@ def query():
         player_points = request.args.get('points', False)
         if(player_points):
                 filterplayers = filterByPoints(filterplayers, player_points)
+
+        #Filter By Rebounds
+        player_rebounds = request.args.get('rebounds', False)
+        if(player_rebounds):
+                filterplayers = filterByRebounds(filterplayers, player_rebounds)
+
+        
                 
                 
         data = { 'teams' : teams, 'players' : players,
