@@ -101,7 +101,7 @@ def query():
                 filterplayers = filterByPlayerFirstName(filterplayers, player_first_name)
 
         #FILTER BY YEAR
-        player_year = request.args.get('player_year', False)
+        player_year = request.args.get('year', False)
         if( player_year ):
                 filterplayers = filterByYear(filterplayers, player_year)
                 
