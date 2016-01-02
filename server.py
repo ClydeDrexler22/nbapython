@@ -37,8 +37,8 @@ def filterByPlayerLastName(players, lastName):
         else:
                 return players
 
-        if result:
-                return result
+        
+        return result
 
 def filterByPlayerFirstName(players, firstName):
         result = []
@@ -49,8 +49,7 @@ def filterByPlayerFirstName(players, firstName):
         else:
                 return players
 
-        if result:
-                return result
+        return result
 
 def filterByYear(players, year):
         result = []
@@ -62,8 +61,7 @@ def filterByYear(players, year):
         else:
                 return players
 
-        if result:
-                return result
+        return result
 
 def filterByPoints(players, points):
         result = []
@@ -78,23 +76,22 @@ def filterByPoints(players, points):
         else:
                 return players
 
-        if result:
-                return result
+        return result
 
 def filterByRebounds(players, rebounds):
         result = []
         if(rebounds != False):
                 for player in players:
                         try:
-                                if int(rebounds) <= int(players['reb']):
+                                if int(rebounds) <= int(player['reb']):
                                         result.append(player)
                         except:
                                 continue
 
         else:
                 return players
-        if result:
-                return result
+        
+        return result
 
 
 
@@ -149,7 +146,8 @@ def query():
                 filterplayers = filterByRebounds(filterplayers, player_rebounds)
 
         
-                
+        if(len(filterplayers) == 0):
+                return 'No Players Match Your Query'
                 
         data = { 'teams' : teams, 'players' : players,
                  'filteredPlayers' : filterplayers[:100] }
