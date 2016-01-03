@@ -93,6 +93,38 @@ def filterByRebounds(players, rebounds):
         
         return result
 
+def filterByAsists(players, asists):
+        result = []
+        if(asists != False):
+                for player in players:
+                        try:
+                                if int(asists) <= int(player['asts']):
+                                        result.append(player)
+                        except:
+                                continue
+
+        else:
+                return players
+        
+        return result
+
+def filterBySteals(players, steals):
+        result = []
+        if(steals != False):
+                for player in players:
+                        try:
+                                if int(steals) <= int(player['stl']):
+                                        result.append(player)
+                        except:
+                                continue
+
+        else:
+                return players
+        
+        return result
+
+
+
 
 
 @app.route('/query', methods=['POST', 'GET'])
@@ -144,6 +176,17 @@ def query():
         player_rebounds = request.args.get('rebounds', False)
         if(player_rebounds):
                 filterplayers = filterByRebounds(filterplayers, player_rebounds)
+
+        #Filter By Asists
+        player_asists = request.args.get('asists', False)
+        if(player_asists):
+                filterplayers = filterByAsists(filterplayers, player_asists)
+
+        #Filter By Steals
+        player_steals = request.args.get('steals', False)
+        if(player_steals):
+                filterplayers = filterBySteals(filterplayers, player_steals)
+        
 
         
         if(len(filterplayers) == 0):

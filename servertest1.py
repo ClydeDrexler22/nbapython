@@ -31,7 +31,7 @@ def filterByasists(asists):
                 return [result]
         else:
                 return False
-def filterBystealss(steals):
+def filterBysteals(steals):
         result = False
         if steals == 'stls':
                 return [result]
