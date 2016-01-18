@@ -19,7 +19,7 @@ def filterByTeamName(players,theTeam):
                 for player in players:
                         if( not 'team_name' in player ):
                                 continue
-                        
+
                         if theTeam == player['team_name']:
                                 result.append(player)
         else:
@@ -37,7 +37,7 @@ def filterByPlayerLastName(players, lastName):
         else:
                 return players
 
-        
+
         return result
 
 def filterByPlayerFirstName(players, firstName):
@@ -56,7 +56,7 @@ def filterByYear(players, year):
         if(year != False):
                 for player in players:
                         if year == player['year']:
-                                result.append(player) 
+                                result.append(player)
                         #build query to filter by year ['year']
         else:
                 return players
@@ -72,7 +72,7 @@ def filterByPoints(players, points):
                                         result.append(player)
                         except ValueError:
                                 continue
-                        
+
         else:
                 return players
 
@@ -90,7 +90,7 @@ def filterByRebounds(players, rebounds):
 
         else:
                 return players
-        
+
         return result
 
 def filterByAsists(players, asists):
@@ -105,7 +105,7 @@ def filterByAsists(players, asists):
 
         else:
                 return players
-        
+
         return result
 
 def filterBySteals(players, steals):
@@ -120,7 +120,7 @@ def filterBySteals(players, steals):
 
         else:
                 return players
-        
+
         return result
 
 
@@ -152,7 +152,7 @@ def query():
                 if( team_name != 'Any' ):
                         filterplayers = filterByTeamName(filterplayers, team_name)
 
-        #PLAYER LAST NAME 
+        #PLAYER LAST NAME
         player_last_name = request.args.get('player_last_name', False)
         if( player_last_name ):
                 filterplayers = filterByPlayerLastName(filterplayers, player_last_name)
@@ -186,12 +186,12 @@ def query():
         player_steals = request.args.get('steals', False)
         if(player_steals):
                 filterplayers = filterBySteals(filterplayers, player_steals)
-        
 
-        
+
+
         if(len(filterplayers) == 0):
                 return 'No Players Match Your Query'
-                
+
         data = { 'teams' : teams, 'players' : players,
                  'filteredPlayers' : filterplayers[:100] }
 
