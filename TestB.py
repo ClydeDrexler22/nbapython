@@ -31,10 +31,8 @@ def filterByTeamName(players,theTeam):
 def filterByPlayerLastName(players, lastName):
         result = []
         if (lastName != False):
-                for player in players:
-                        player == player['lastname']
-                        player == player.ascii_lowercase 
-                        if lastName.lower() == player:
+                for player in (name.lower() for name in players):
+                        if lastName.lower() == player['lastname']:
                                 result.append(player)
         else:
                 return players
