@@ -44,7 +44,7 @@ def filterByPlayerFirstName(players, firstName):
         result = []
         if(firstName != False):
                 for player in players:
-                        if firstName.title() == player['firstname']:
+                        if firstName == player['firstname']:
                                 result.append(player)#build query to filter by first name ['firstname']
         else:
                 return players
