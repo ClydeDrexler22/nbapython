@@ -58,9 +58,22 @@
           <thead>
             <tr>
                 <th>logo</th>
-              {% for key, player in data.filteredPlayers[0].iteritems() %}
-                <th>{{key}}</th>
-              {% endfor %}
+                <th>First Name</th>
+                <th>Last name</th>
+                <th>Team</th>
+                <th>League</th>
+                <th>Year</th>
+                <th>GP</th>
+                <th>Assists</th>
+                <th>PTS</th>
+                <th>Rebounds</th>
+                <th>Stls</th>
+                <th>Blks</th>
+                <th>Turnovers</th>
+                <th>Fga</th>
+                <th>Fgm</th>
+                <th>Tpa</th>
+                <th>Tpm</th>
             </tr>
           </thead>
           <tbody>
@@ -68,9 +81,22 @@
             <tr>
                 <td><img src="http://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/{{player.team}}.png&h=50&w=50" alt="team logo"
                     onerror="if (this.src != 'error.jpg') this.src = '{{url_for('static', filename='error.jpg')}}';"></td>
-                {% for key, val in player.iteritems() %}
-                <td>{{val}}</td>
-                {% endfor %}
+                  <td>{{player['lastname']}}</td>
+                  <td>{{player['firstname']}}</td>
+                  <td>{{player['team']}}</td>
+                  <td>{{player['leag']}}</td>
+                  <td>{{player['year']}}</td>
+                  <td>{{player['gp']}}</td>
+                  <td>{{player['pts']}}</td>
+                  <td>{{player['asts']}}</td>
+                  <td>{{player['reb']}}</td>
+                  <td>{{player['stl']}}</td>
+                  <td>{{player['blk']}}</td>
+                  <td>{{player['turnover']}}</td>
+                  <td>{{player['fga']}}</td>
+                  <td>{{player['fgm']}}</td>
+                  <td>{{player['tpa']}}</td>
+                  <td>{{player['tpm']}}</td>
             </tr>
             {% endfor %}
           </tbody>
